@@ -1,0 +1,301 @@
+Q1.
+package SA;
+public class Q1 {
+
+    public static void main(String[] args) {
+        String line = "Hello world 37 1!";
+        int vowels = 0, consonants = 0, digits = 0, spaces = 0;
+
+        line = line.toLowerCase();
+        for(int i = 0; i < line.length(); ++i)
+        {
+            char ch = line.charAt(i);
+            if(ch == 'a' || ch == 'e' || ch == 'i'
+                || ch == 'o' || ch == 'u') {
+                ++vowels;
+            }
+            else if((ch >= 'a'&& ch <= 'z')) {
+                ++consonants;
+            }
+            else if( ch >= '0' && ch <= '9')
+            {
+                ++digits;
+            }
+            else if (ch ==' ')
+            {
+                ++spaces;
+            }
+        }
+
+        System.out.println("Vowels: " + vowels);
+        System.out.println("Consonants: " + consonants);
+        System.out.println("Digits: " + digits);
+        System.out.println("White spaces: " + spaces);
+    }
+}
+---------------------------------------------------------------------------------
+Q2.
+package SA;
+import java.util.*;
+class  Q2
+{
+
+	public static void main(String[] args) {
+		
+		
+
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the string :  ");
+		String s1=sc.nextLine();
+		s1=s1.toLowerCase();
+		 String s2=""; String s3=""; 
+		 String s4=""; String s5=""; 
+		 String s6=""; String s7=""; 
+		 String s8=""; String s9=""; 
+		 String s10=""; String s11=""; 
+		 
+		 if(s1.contains("nine")) 
+		 { 
+			 s2=s1.replace("nine", "ten");
+			 
+		 }else s2=s1;
+		 if(s2.contains("eight")) 
+		 { 
+			 s3=s2.replace( "eight","nine");
+		 
+		 } else s3=s2;
+		 if(s3.contains("seven")) 
+		 { 
+			 s4=s3.replace( "seven","eight");
+		 
+		 }else s4=s3;
+		 if(s4.contains("six")) 
+		 { 
+			 s5=s4.replace( "six","seven");
+		 
+		 }else s5=s4;
+		 if(s5.contains("five")) 
+		 { 
+			 s6=s5.replace( "five","six");
+		 
+		 }else s6=s5;
+		 if(s6.contains("four")) 
+		 { 
+			 s7=s6.replace( "four","five");
+		 
+		 }else s7=s6;
+		 if(s7.contains("three")) 
+		 { 
+			 s8=s7.replace( "three","four");
+		 
+		 }else s8=s7;
+		 if(s8.contains("two")) 
+		 { 
+			 s9=s8.replace( "two","three");
+		 
+		 }else s9=s8;
+		 if(s9.contains("one")) 
+		 { 
+			 s10=s9.replace( "one","two");
+		 
+		 }else s10=s9;
+		 if(s10.contains("zero")) 
+		 { 
+			 s11=s10.replace( "zero","one");
+		 
+		 }else s11=s10;
+
+		 System.out.println(s11);	 
+	}
+}
+
+----------------------------------------------------------------------------------
+Q3
+package SA;
+import java.util.*;
+
+class First {
+
+   
+    public void StringCon(String k) {
+        
+        char ch[] = k.toCharArray();
+        
+        char temp =ch[0];
+          
+        for (int i = 1; i <ch.length; i++)//1-6
+        {
+            char val = ch[i];
+           
+            if (val != temp) {
+                System.out.print(temp);
+                temp = val;
+            }
+            if (val == temp && i==ch.length-1)
+            {
+            System.out.print(temp);
+            }
+        }
+    }
+}
+
+public class Q3 {
+
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a string");
+        String k = sc.nextLine();
+        First f1 = new First();
+        f1.StringCon(k);
+
+    }
+}
+---------------------------------------------------------------------------------
+Q4.
+package SA;
+import java.util.*;
+class  Q4
+{
+        public static void main(String[] args)
+        {
+            Scanner sc=new Scanner(System.in);
+            System.out.println("Enter String");
+            String s=sc.nextLine();
+            char arr[]=s.toCharArray();
+            int x=arr.length,count=0;
+            char y=' ';
+            
+            for(int i=1;i<x-1;i++)
+            {
+                if(arr[i]!=arr[i-1] && arr[i]!=arr[i+1])
+                {
+                   y=arr[i];
+                   count++;
+                   break;
+                }
+            }
+                if(count==1)
+                   System.out.println(y);
+                else
+                   System.out.println("Not found");
+        }
+}
+
+-------------------------------------------------
+Q5.
+
+package SA;
+import java.util.*;
+class Q5 { 
+	static void count(String str) 
+	{ 
+		// Create an char array of given String 
+		char[] ch = str.toCharArray(); 
+		for (int i = 0; i < ch.length; i++) { 
+
+			// Declare an String with empty initialization 
+			String s = ""; 
+
+			// When the character is not space 
+			while (i < ch.length && ch[i] != ' ') { 
+
+				// concat with the declared String 
+				s = s + ch[i]; 
+				i++; 
+			} 
+
+			if (s.length() > 0) 
+				System.out.print(s.length()+" ");			 
+		} 
+	} 
+	public static void main(String[] args) 
+	{ 
+		String str = "I am a Java programmer"; 
+		count(str); 
+	} 
+} 
+------------------------------------------------------------------------
+Q6.
+package SA;
+import java.util.*;
+class Q6
+{
+        public static void main(String args[])
+        {
+            Scanner sc=new Scanner(System.in);
+            System.out.print("Enter String: ");
+            
+            String s=sc.nextLine();
+            char arr[]=s.toCharArray();
+            
+            int count=0;
+            int y=s.indexOf(arr[0],1);
+            
+            if(3*y==arr.length)
+            {
+                for(int i=0;i<2*y;i++)
+                {
+                    if(arr[i]==arr[i+y])
+                        count++;
+                }
+            }
+            if(count==(2*y))
+                System.out.println("true");
+            else
+                System.out.println("false");
+        }
+}
+
+-------------------------------------------------------------------
+Q8.
+package SA;
+import java.util.*;
+
+class Q8 {
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+         System.out.println("Enter String");
+        String s=sc.nextLine();
+        String rev="";
+        char a[]=s.toCharArray();
+        for(int i=a.length-1;i>=0;i--){
+       rev=rev+a[i];
+        }
+        System.out.println("Reverse String : "+rev);
+    }
+}
+--------------------------------------------------------------------
+Q9
+package SA;
+import java.util.*;
+class Q9
+{
+        public static void main(String args[])
+        {
+            Scanner sc=new Scanner(System.in);
+            System.out.print("Enter String 1: ");
+            String s1=sc.nextLine();
+            System.out.print("Enter String 2: ");
+            String s2=sc.nextLine();
+            
+            char arr1[]=s1.toCharArray();
+            char arr2[]=s2.toCharArray();
+            int i, j;
+            char x;
+            
+            for(i=0 ; i<s1.length(); i++)
+            {
+                x=' ';
+                for(j=0 ; j<s2.length() ; j++)
+                {
+                    if(arr1[i]==arr2[j] && arr1[i]!=' ' && arr2[j]!=x)
+                    {
+                        System.out.print(arr1[i]+", ");
+                        x=arr2[j];
+                        arr2[j]=' ';
+                    }
+                }
+            }
+            System.out.println();
+        }
+}
