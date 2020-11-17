@@ -1,0 +1,338 @@
+q1
+class Student{
+
+int rollno;
+String name;
+int marks;
+
+Student()
+{
+rollno=101;
+System.out.println("Rollno "+rollno);
+}
+
+Student(int rn,String name1,int m)
+{
+rollno=rn;
+name=name1;
+marks=m;
+
+
+}
+void display()
+{
+
+System.out.println("Students Details");
+System.out.println("Roll number: "+rollno);
+System.out.println("Student name: "+name);
+System.out.println("Marks: "+marks);
+}
+}
+
+class Smain{
+
+public static void main(String args[])
+{
+Student s=new Student();
+Student s1=new Student(1,"Rachana",85);
+Student s2=new Student(2,"Rachana",80);
+ s.display();
+ s1.display();
+ s2.display();
+
+}
+}
+----------------------------------------------------------------------
+q2
+import java.util.*;
+class Book{
+
+int id;
+String name;
+int price;
+Book()
+{
+id=1000;
+
+
+}
+
+Book(int id1,String name1,int price1)
+{
+id=id1;
+name=name1;
+price=price1;
+
+}
+
+
+void display()
+{
+System.out.println("ID : "+id);
+System.out.println("Name : "+name);
+System.out.println("Price : "+price);
+}
+}//end of book
+
+
+
+
+class BookM{
+public static void main(String args[])
+{
+
+Scanner sc=new Scanner(System.in);
+System.out.println("Enter number of books");
+int n=sc.nextInt();
+Book b[]=new Book[n];
+int i,id,price,y;
+int max=0,key=0;
+String name;
+for(i=0;i<n;i++)
+{
+System.out.println("Enter Book_id,Book_name,Book_price : ");
+id=sc.nextInt();
+sc.nextLine();
+name=sc.nextLine();
+price=sc.nextInt();
+
+b[i]=new Book(id,name,price);
+}
+System.out.println("books data");
+for(i=0;i<n;i++)
+{
+b[i].display();
+}
+for(y=0;y<n;y++)
+{
+if(b[y].price > max)
+{
+key=y;
+max=b[y].price;
+
+}
+}
+System.out.println("Book with highest price:");
+b[key].display();
+
+}}
+------------------------------------------------------------------------
+q3
+package test;
+import java.util.Scanner;
+
+class Bank
+{
+    private int accNo;
+    private String accName;
+    private String typeAcc;
+    private final int amt;
+    
+    Bank()
+    {
+        amt=1000;
+    }
+    void set(int accNo,String accName,String typeAcc)
+    {
+        this.accNo=accNo;
+        this.accName=accName;
+        this.typeAcc=typeAcc;
+    }
+    
+    void withdraw(int w_amt)
+    {
+        int total_amt = 0;
+        if(w_amt<=amt)
+        {
+            total_amt=amt-w_amt;
+        }
+        else
+        {
+            System.out.println("Not sufficient balance!!!");
+        }
+        System.out.println("Account no :"+accNo+"\nAccount Name :"+accName+"\nType of account :"+typeAcc+"\nBalance :"+total_amt);
+    }
+    
+    void deposite(int d_amt)
+    {
+        int total_amt;
+        total_amt=amt+d_amt;
+        System.out.println("Account no :"+accNo+"\nAccount Name :"+accName+"\nType of account :"+typeAcc+"\nBalance :"+total_amt);
+    }
+     
+    
+}
+public class Banking {
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter your account number :");
+        int no=sc.nextInt();
+        sc.nextLine();
+        System.out.println("Enter your name :");
+        String name=sc.nextLine();
+        System.out.println("Enter your type of account :");
+        String type=sc.nextLine();
+        Bank b1=new Bank();
+        b1.set(no,name,type);
+        int ch;
+        
+        do
+        {
+        System.out.println("Enter your choice :");
+        System.out.println("\n1.Withdraw\n2.Deposite\n3.Exit");
+        ch=sc.nextInt();
+        switch(ch)
+        {
+            case 1:
+                System.out.println("How much amount you want to withdraw :");
+                int w_amt=sc.nextInt();
+                b1.withdraw(w_amt);
+                break;
+                
+            case 2:
+                System.out.println("How much amount you want to deposite :");
+                int d_amt=sc.nextInt();
+                b1.deposite(d_amt);
+                break;
+                
+        }
+        }while(ch!=3);
+    }
+}
+
+------------------------------------------------------------------------------
+q4
+import java.util.*;
+class Employee
+{
+static String CompanyName="ABC Technology";
+int id;
+String name;
+String designation;
+Employee(int x,String name1,String designation1)
+{
+id=x;
+ name=name1;
+ designation=designation1;
+}
+void display()
+{
+
+System.out.println("ID :"+id);
+System.out.println("Name :"+name);
+System.out.println("Designation :"+designation );
+System.out.println("CompanyName :"+CompanyName );
+}
+}
+class EmployeeM{
+
+public static void main(String args[])
+{
+Scanner sc=new Scanner(System.in);
+System.out.println("Enter no of employees");
+int n=sc.nextInt();
+int i,Id,y;
+String name,designation;
+Employee e[]=new Employee[n];
+for(i=0;i<n;i++)
+{
+System.out.println("Enter Employee Details");
+Id=sc.nextInt();
+sc.nextLine();
+name=sc.nextLine();
+designation=sc.nextLine();
+e[i]=new Employee(Id,name,designation);
+//e[i].display();
+}
+System.out.println("Display Employee details");
+for(i=0;i<n;i++)
+{
+e[i].display();
+}
+System.out.println("Display Employee details with designation Manager");
+for( y=0;y<n;y++)
+{
+if("Manager".equals(e[y].designation))
+{
+e[y].display();
+}
+}
+}
+}
+------------------------------------------------------------------------------------------------
+q5
+import java.util.*; 
+class Simple{
+double principleamount;
+static double rIntrest;
+int years;
+double intrest;
+
+
+double calculate(double p,double r,int years)
+{
+/*principleamount=p;
+rIntrest=r;
+years=years;*/
+intrest=(p*r*years)/100;
+return intrest;
+
+}
+
+}//end of Simple
+
+class Si{
+
+public static void main(String args[])
+{
+Scanner sc=new Scanner(System.in);
+System.out.println("Enter values for principle amount,rate of intrest,no of years");
+double p=sc.nextDouble();
+double x=sc.nextDouble();
+int y=sc.nextInt();
+
+Simple s=new Simple();
+double z=s.calculate(p,x,y);
+
+System.out.println("Simple intrest: "+z);
+}
+
+}
+------------------------------------------------------------------------------
+q6
+package Assignmet;
+public class ComplexNumber{
+   double real, img;
+
+   ComplexNumber(double r, double i){
+	this.real = r;
+	this.img = i;
+   }
+	
+   public static ComplexNumber sum(ComplexNumber c1, ComplexNumber c2)
+   {
+	
+        ComplexNumber temp = new ComplexNumber(0, 0);
+
+        temp.real = c1.real + c2.real;
+        temp.img = c1.img + c2.img;
+
+        return temp;
+    }
+    public static void main(String args[]) {
+	ComplexNumber c1 = new ComplexNumber(5.5, 4);
+	ComplexNumber c2 = new ComplexNumber(1.2, 3.5);
+        ComplexNumber temp = sum(c1, c2);
+        System.out.printf("Sum is: "+ temp.real+" + "+ temp.img +"i");
+    }
+}
+-------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
