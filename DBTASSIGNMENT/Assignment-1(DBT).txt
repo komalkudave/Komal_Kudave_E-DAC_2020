@@ -1,0 +1,161 @@
+Q1.
+Query:-
+create database Assignment;
+use Assignment;
+----member table----
+create table Member(Member_Id int(5) ,Member_Name varchar(30),Member_address varchar(50),
+Acc_Open_date date,Membership_type varchar(20),Penalty_Amount int(7));
+
+------Issue table---------
+create table Issue(Lib_Issue_Id int(10),Book_No int(6) ,Member_Id int(5),Issue_Date date,Return_Date date);
+
+---------Books table---------------------
+create table Books(Book_No int(6) ,Book_Name varchar(30),Author_Name varchar(30),
+Cost int(7),Category Char(10));
+
+Q2. Schema
+Query:- 
+describe Member;
+
+Member_Id	int(5)	YES		
+Member_Name	varchar(30)	YES		
+Member_address	varchar(50)	YES		
+Acc_Open_date	date	YES		
+Membership_type	varchar(20)	YES		
+Penalty_Amount	int(7)	YES		
+
+
+describe Books;
+
+Book_No	int(6)	YES		
+Book_Name	varchar(30)	YES		
+Author_Name	varchar(30)	YES		
+Cost	int(7)	YES		
+Category	char(10)	YES		
+
+describe Issue;
+
+Lib_Issue_Id	int(10)	YES		
+Book_No	int(6)	YES		
+Member_Id	int(5)	YES		
+Issue_Date	date	YES		
+Return_Date	date	YES		
+
+
+Q.3
+Query:-
+alter table Member drop Penalty_Amount;
+
+After dropping column Penalty_Amount
+describe Member;
+
+Member_Id	int(5)	YES		
+Member_Name	varchar(30)	YES		
+Member_address	varchar(50)	YES		
+Acc_Open_date	date	YES		
+Membership_type	varchar(20)	YES	
+
+
+Q4.Insert operation
+
+Query:-
+insert into Member values(1,'Richa Sharma','Pune','2005/12/10','Lifetime');
+insert into Member values(2,'Garima Sen','Pune',CURDATE(),'Annual');
+
+Q5. Insert rows
+
+Query:-
+
+insert into Member(Member_Id,Member_Name,Member_address,Acc_Open_date,Membership_type) 
+values(3,'Mahesh sheti','Mumbai','2006/05/12','Annual'),
+(4,'Vinit Panchal','Vranasi','2007/09/30','Half'),
+(5,'Kajal Agrwal','Delhi','2008/06/05','Yearly'),
+(6,'Trupti Mathur','Banglore','2008/12/12','Quarterly'),
+(7,'Sufiyan Shekh','Hyderabad','2016/11/30','Lifetime');
+
+Query:-
+
+select Member_Id,
+Member_Name,
+Member_address,
+date_format(Acc_Open_date,'%e-%b-%y') as Acc_Open_date,
+Membership_type from Member;
+
+Result:-
+1	Richa Sharma	Pune	10-Dec-05	Lifetime
+2	Garima Sen	Pune	4-Dec-20	                 Annual
+3	Mahesh sheti	Mumbai	12-May-06	Annual
+4	Vinit Panchal	Vranasi	30-Sep-07	Half
+5	Kajal Agrwal	Delhi	5-Jun-08	                Yearly
+6	Trupti Mathur	Banglore	12-Dec-08	Quarterly
+7	Sufiyan Shekh	Hyderabad 30-Nov-16	Lifetime
+
+Q6.
+Query:-
+insert into Books(Book_No,Book_Name,Author_Name,Cost,Category) 
+values(101,'Let us C','Denis Ritchie',450,'System'),
+(102,'Oracle-Complete Ref','Loni',550,'Database'),
+(103,'Mastering SQL','Loni',250,'Database'),
+(104,'PL SQL-Ref','ScottUrman',750,'Database');
+
+Q.7
+Query:-
+
+select * from books;
+
+Result:-
+101	Let us C	                  Denis Ritchie	450            System          	           
+102	Oracle-Complete Ref	Loni	550	Database
+103	Mastering SQL	 	Loni	250            Database
+104	PL SQL-Ref	ScottUrman	750	Database
+
+Q8.
+Query:-
+update Books set Cost=300 ,Category='RDBMS'
+ where Book_No=103;
+
+Result:-
+
+101	Let us C	                 Denis Ritchie	450           System         	           
+102	Oracle-Complete Ref	Loni	550	Database
+103	Mastering SQL	           Loni	300	RDBMS
+104	PL SQL-Ref	ScottUrman	750	Database
+
+
+Q.9
+Query:-
+drop table issue;
+
+select * from issue;
+result:-assignment.issue doesn't exist.
+
+Q10.
+Query:-
+create table Issue(Lib_Issue_Id int(10),Book_No int(6) ,Member_Id int(5),Issue_Date date,Return_Date date);
+
+insert into issue (Lib_Issue_Id,Book_No,Member_Id,Issue_Date) values(7001,101,1,'2006/12/10'),
+(7002,102,2,'2006/12/25'),
+(7003,104,1,'2006/01/15'),
+(7004,101,1,'2006/06/04'),
+(7005,104,2,'2006/11/15'),
+(7006,101,3,'2006/02/18');
+
+Query:- 
+select Lib_Issue_Id,Book_No,Member_Id,date_format(Issue_Date,'%e-%b-%y') as Issue_Date,Return_Date from issue;
+
+Result:-
+7001	101	1	10-Dec-06	
+7002	102	2	25-Dec-06	
+7003	104	1	15-Jan-06	
+7004	101	1	4-Jun-06	
+7005	104	2	15-Nov-06	
+7006	101	3	18-Feb-06	
+
+
+
+
+	
+
+
+
+				
