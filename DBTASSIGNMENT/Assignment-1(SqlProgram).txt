@@ -1,0 +1,118 @@
+--------------------EMPLOYEE TABLE------------------
+
+EMPNO	ENAME,	JOB		MGR	HIREDATE	SAL	DEPTNO
+1000	Manish	SALESMAN	1003	18-02-2020	600	30
+1001	Manoj	SALESMAN	1003	18-02-2018	600	30
+1002	Ashish	SALESMAN	1003	18-02-2013	750	30
+1004	Rekha	ANALYST		1006	18-02-2001	3000	10
+1005	Sachin	ANALYST		1006	18-02-2019	3000	10
+1006	Pooja	MANAGER		18-02-2000	6000	10
+**********************************************
+--------------------DEPARTMENT TABLE------------------
+DNO	DNAME	AREA
+10	Store	Mumbai
+20	Purchase	Mumbai
+30	Store	Delhi
+40	Marketing	Pune
+50	Finance	Delhi
+60	Accounts	Mumbai
+
+
+*****************************************************************
+/*1.	Write a Procedure that accepts values of two non-zero numbers 
+using IN parameter and perform addition, subtraction, multiplication, division and print.*/
+
+delimiter ##
+create procedure In_para(IN x int,IN y int)
+Begin
+select x+y;
+select x-y;
+select x*y;
+select x/y;
+End ##
+
+call In_para(5,2);
+OP:-
+*****************************************************************************************
+/*2.	Write a Procedure to print the string in 
+REVERSE order. Take the input using IN parameter. (Ex .Database , o/p :esabatad)*/
+
+delimiter %%
+create procedure Reverse(In st varchar(20))
+Begin
+select reverse(st);
+End %%
+call Reverse("Database");
+******************************************************************************************
+/*3.	Write a Procedure to display top 5 employee based
+ on highest salary and display employee number, employee name and salary.*/
+ delimiter @@
+ create procedure Top5Emp()
+ begin
+ select empno,ename,sal from emp order by sal desc
+ limit 5;
+ end @@
+ 
+ call Top5Emp();
+*********************************************************************
+
+/*4.	Write a Procedure to create table emp_test with e_id integer, 
+e_name varchar(10), e_joining_date date as columns*/
+
+delimiter $$
+create procedure CreateTable()
+Begin
+create table emp_test (e_id integer,e_name varchar(10), e_joining_date date);
+End $$
+
+call CreateTable();
+*******************************************************************************
+/*5.	Write a Procedure to add a department row
+ in the DEPT table with the following values for columns
+ deptno  vaue 60,Dname  value should be  ‘Education’, area value should be Pune. */
+
+delimiter !!
+create procedure AddRowDept(IN no integer,IN name varchar(20),IN area varchar(20) )
+begin 
+insert into dept(dno,dname,area) values(no,name,area);
+end !!
+-- call AddRowDept(60,'Education','Pune');
+****************************************************************
+/*6.	Write a program that declares an integer variable called num, 
+assigns a value to it and print, the value of the variable itself, its square, and its cube.*/
+
+delimiter &&
+create procedure Print()
+begin
+declare num integer;
+set num=5;
+select num;
+select num*num;
+select pow(num,3);
+end &&
+
+call Print();
+
+*****************************************************************
+7.Write a program that declares an integer variable assign a value to it and display it using OUT parameter.
+delimiter **
+create procedure DisplayOut(Out var1 integer)
+begin
+declare var2 integer;
+set var2=16;
+select var2 into var1;
+end **
+
+call DisplayOut(@var1);
+select @var1;
+******************************************************************************
+/*8.	Write a program that demonstrates the usage of IN and OUT parameters.*/
+delimiter ^^
+create procedure my_pro_INOUT(inout var varchar(20))
+begin
+select min(sal) INTO VAR  from emp where DEPTNO=10;
+end ^^
+set @var=10;
+call my_pro_INOUT(@var);
+select @var;
+*******************************************************************************************************************
