@@ -1,0 +1,163 @@
+/*1 Write a Procedure that displays names and salaries of all Analysts recorded in the “emp” table by making use of a cursor.*/
+use cursordb;
+
+/*create table emp (emp_id int,ename varchar(20),jobtype varchar(20),sal int);
+insert into emp values(2,'kamlesh','analyst',50000);
+insert into emp values(3,'kalpana','analyst',35000);
+insert into emp values(4,'kartiki','analyst',45000);
+insert into emp values(5,'kavi','tester',30000);
+insert into emp values(6,'karan','developer',40000);*/
+/*delimiter !!
+create procedure DisplayCur()
+begin
+declare salary int;
+declare name varchar(20);
+declare finish int default 0;
+declare dis_cursor cursor for select ename,sal from emp where jobtype='analyst';
+declare continue handler for not found set finish=1;
+open dis_cursor;
+a_get:loop
+fetch dis_cursor into name ,salary;
+if finish=1 then
+leave a_get;
+end if;
+select salary,name;
+end loop;
+end!!
+call displayCur;
+*/
+create table emp2(emp_id int primary key,ename varchar(20),salary int);
+insert into emp2 values(101,"Komal",20000);
+insert into emp2 values(102,"Arun",10000);
+insert into emp2 values(103,"Jigar",9000);
+insert into emp2 values(104,"Manasi",9500);
+insert into emp2 values(105,"Kshitija",12000);
+insert into emp2 values(106,"Kishor",14000);
+insert into emp2 values(107,"Keshav",10000);
+select * from emp2;
+*************************
+/*2.	Write a Procedure to display top 5 employees based on highest salary and 
+display employee number, employee name and salary using Cursor.*/
+
+delimiter ^^
+create procedure Top_5()
+begin
+declare e_id int ;
+declare e_name varchar(20);
+declare e_sal int ;
+declare done int default 0;
+declare top cursor for select * from emp2 order by sal desc limit 5;
+declare exit handler for not found set done=1;
+open top;
+l1:loop
+fetch top into e_id,e_name,e_sal ;
+select e_id,e_name,e_sal;
+if done=1 then
+leave l1;
+end if;
+end loop;
+close top;
+end ^^
+call Top_5();
+**************************************************
+create table emp3(emp_id int primary key,fname varchar(20),lname varchar(20),salary int);
+insert into emp3 values(101,"Komal","Kudave",25000);
+insert into emp3 values(102,"Arun","kale",10000);
+insert into emp3 values(103,"Jigar","mhajan",19000);
+insert into emp3 values(104,"Manasi","Sukate",25000);
+insert into emp3 values(105,"Kshitija","Patil",20000);
+select * from emp3;
+------------------------------------------------------------------
+/*3.	Write  a procedure to display the concatenated first_name and last_name from 
+“emp” table using cursors handle the  errors with Exit handler*/
+delimiter $$
+create procedure ConcateName()
+begin
+declare fna varchar(20);
+declare lna varchar(20);
+declare done int default 0;
+declare Con cursor for select fname,lname from emp3;
+declare exit handler for not found set done=1;
+open Con;
+l1:loop
+fetch Con into fna,lna;
+if done=1 then
+leave l1;
+end if;
+select concat(fna," ",lna);
+end loop;
+close Con;
+end $$
+call ConcateName();
+----------------------------------------------------------------------------------------
+select * from emp2;
+/*4.	Write a procedure which select all the data from employee table and display 
+the data of employee where employee name is ‘Manish’ using cursors.*/
+delimiter !!
+create procedure Display()
+begin
+declare finished int default 0;
+declare salary int ;
+declare name varchar(20);
+declare id int;
+declare dis cursor for select * from emp2;
+declare exit handler for not found set finished=1;
+open dis;
+repeat 
+fetch dis into id,name,salary;
+if name="Manish" then
+select * from emp2 where ename="Manish";
+end if;
+until finished
+end repeat;
+close dis;
+end !!
+
+call Display();
+
+*************************************************************************************************************
+/*5.	Write a procedure which select delete the data from employee table if emp sal is less than 
+10000  using cursor and handle the  Sqlexception with continue handler*/
+use myprogram;
+delimiter ##
+create procedure Delete_record()
+begin
+declare finished int default 0;
+declare salary int ;
+declare name varchar(20);
+declare id int;
+declare del cursor for select * from emp2 where sal<10000;
+declare continue handler for not found set finished=1;
+open del;
+repeat 
+fetch del into id,name,salary;
+delete from emp2 where emp_id=id;
+until finished
+end repeat;
+close del;
+end##
+call  Delete_record();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
