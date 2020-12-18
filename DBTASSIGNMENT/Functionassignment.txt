@@ -1,0 +1,140 @@
+/*1.	Write function that accepts a positive number from a user and displays its factorial on the screen.
+delimiter ##
+create function fact(var int)returns int
+begin
+declare output int default 1;
+while var>0 do
+set output=output*var;
+set var=var-1;
+end while;
+return output;
+end ##
+select fact(5);
+*/
+-------------------------------------------------------------------------------------------------------------------------------
+/*2.	Write a function that accepts a positive number ‘n’ and displays whether that number is a Prime number or not.
+
+delimiter @@
+create function Prime(x int)returns varchar(30)
+begin
+declare n int default 0;
+declare i int default 2;
+if x=0 or x=1 then
+return "Not prime";
+end if;
+while i<x DO
+if x%i =0
+then set n=n+1;
+end if;
+set i=i+1;
+end while;
+if n>=1 then return "Not Prime Number";
+else 
+return "Prime Number";
+end if;
+end @@
+select prime();
+*/
+-------------------------------------------------------------------------------------------------------------------------------
+/*5.	Create a function named USER_ANNUAL_COMP that has a parameter p_eno for passing on the 
+values of  an employee number of the employee and p_comp for passing the compansation. 
+In the function calculates and returns the annual compensation of the employee by using the following formula.
+annual_compensation =  (p_sal+p_comm)*12
+If the salary or commission value is NULL then zero should be substituted for it.  Give a call to USER_ANNUAL_COMP.*/
+
+delimiter $$
+create function USER_ANNUAL_COMP(p_no int,p_comp int) returns double
+begin
+declare annual_compensation double;
+declare p_sal int ;
+set p_sal= (select sal from emp2 where emp_id=p_no);
+if p_sal is null||p_comp is null then
+return 0;
+else
+set annual_compensation=(p_sal+p_comp)*12;
+return annual_compensation;
+end if;
+end $$
+select USER_ANNUAL_COMP(101,"123") ;
+select * from emp2;
+drop function USER_ANNUAL_COMP;
+use myprogram;
+
+-------------------------------------------------------------------------------------------------------------------------------
+/*3
+delimiter %%
+create function Converts(val int) returns varchar(30)
+begin
+declare inch int default 0;
+declare feet int default 0;
+declare rem int default 0;
+declare yards int default 0;
+set yards=val/36;
+set rem=val%36;
+set feet=rem/12;
+set rem=rem%12;
+set inch=rem;
+return (select concat(yards," yards ",feet," feet ",inch," inches "));
+end %%
+select converts(36);
+*/
+-------------------------------------------------------------------------------------------------------------------------------
+-- 4.	Write a function to update salary of the employees of specified dept by 10%. Take dept no as parameter.
+/*delimiter !!
+create function Update_sal(varno int ) returns integer
+begin
+update myprogram.emp set sal=sal+(sal*10/100)
+where deptno=varno;
+return 1;
+end !!
+select update_sal(30);
+select * from emp;
+*/
+select * from emp;
+-------------------------------------------------------------------------------------------------------------------------------
+/*7.	Create a procedure to print the inputted string in reverse order. 
+If  inputted string is null display an appropriate message
+delimiter $$
+create procedure RS(in var varchar(20))
+begin
+if var=" " then 
+select "String is null";
+else
+select reverse(var);
+end if;
+end $$
+
+call RS("abc");
+-------------------------------------------------------------------------------------------------------------------------------
+*/USE TEST
+/*8.	Create a procedure named ‘tabledetails’ which gives all the details of
+ a particular table stored in database.*/
+
+delimiter $$
+create procedure tabledetails()
+begin
+SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE';
+end $$
+-- drop procedure tabledetails;
+call tabledetails();
+-------------------------------------------------------------------------------------------------------------------------------
+/*6.	Create a procedure called USER_QUERY_EMP that accepts three parameters. 
+Parameter p_myeno is of IN parameter mode which provides the empno value. 
+The other two parameters p_myjob and p_mysal are of OUT mode. 
+The procedure retrieves the salary and job of an employee with the provided employee number 
+and assigns those to the two OUT parameters respectively. 
+The procedure should raise the error if the empno does not exist in the EMP table by displaying an appropriate message*/
+
+
+delimiter %%
+create procedure USER_QUERY_EMP(in p_myeno int,out p_myjob varchar(20),out p_mysal int )
+begin
+declare salary int;
+declare job varchar(20);
+declare emp_no int;
+select sal,job,empno  into p_mysal,p_myjob,emp_no from emp where EMPNO=p_myeno; 
+select p_mysal,p_myjob;
+end %%
+call USER_QUERY_EMP(100,@job,@salary);
+select @job,@salary;
+
